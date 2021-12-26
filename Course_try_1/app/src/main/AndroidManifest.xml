@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="it.mirea.myapplication">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="Settings">
+        </activity>
+
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profile">
+        </activity>
+
+        <activity
+            android:name=".ProfileAuthorActivity"
+            android:label="ProfileAuthor">
+        </activity>
+
+        <activity
+            android:name=".ProfileSupervisorActivity"
+            android:label="ProfileSupervisor">
+        </activity>
+
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Register">
+        </activity>
+
+        <activity
+            android:name=".EntryActivity"
+            android:label="Entry">
+        </activity>
+
+        <activity
+            android:name=".CameraActivity"
+            android:label="Camera">
+        </activity>
+
+
+        <activity
+            android:name=".BookActivity"
+            android:label="BookDescription">
+        </activity>
+
+
+        <activity
+            android:name=".TextbookActivity"
+            android:label="BookText">
+        </activity>
+
+
+        <activity
+            android:name=".AddBookActivity"
+            android:label="AddBook">
+        </activity>
+
+        <activity
+            android:name=".ViewUsersActivity"
+            android:label="ViewUsers">
+        </activity>
+
+
+    </application>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+</manifest>
