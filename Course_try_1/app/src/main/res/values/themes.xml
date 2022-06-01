@@ -15,4 +15,20 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/background_dark</item>
+        <!-- Text Color for title and message -->
+        <item name="colorOnSurface">@color/white</item>
+        <!-- Style for positive button -->
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <!-- Style for negative button -->
+        <item name="buttonBarNegativeButtonStyle">@style/ButtonStyle</item>
+    </style>
+
+    <style name="ButtonStyle" parent="ThemeOverlay.AppCompat">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>

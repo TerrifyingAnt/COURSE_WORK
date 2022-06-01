@@ -1,9 +1,11 @@
 package it.mirea.myapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 public class Single {
 
     private static final Single INSTANCE = new Single();
-
     public Single(){
         logic = false;
         name = "";
