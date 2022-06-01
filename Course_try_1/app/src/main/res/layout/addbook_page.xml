@@ -60,15 +60,17 @@
             tools:srcCompat="@drawable/ic_newroundnotext" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
+    <TextView
+        android:id="@+id/bookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:ems="10"
+        android:gravity="center|center_horizontal|center_vertical"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Название книги"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -82,14 +84,14 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Жанр"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/chooserButton1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+        app:layout_constraintTop_toBottomOf="@+id/bookName"
         app:layout_constraintVertical_bias="0.232" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/chooserButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"

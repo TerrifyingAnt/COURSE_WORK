@@ -1,15 +1,24 @@
 package it.mirea.myapplication;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.Date;
 
 
@@ -62,6 +71,4 @@ public class ProfileAuthorActivity extends Activity {
         startActivity(intent);
         finish();
     }
-
-
 }
