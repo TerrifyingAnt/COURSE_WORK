@@ -62,41 +62,62 @@
 
     <TextView
         android:id="@+id/bookName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_width="229dp"
+        android:layout_height="43dp"
         android:ems="10"
         android:gravity="center|center_horizontal|center_vertical"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Название книги"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="230dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Жанр"
-        app:layout_constraintBottom_toTopOf="@+id/chooserButton1"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bookName"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/chooserButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_width="157dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="211dp"
+        android:layout_marginBottom="364dp"
         android:background="@color/background_dark"
+        android:onClick="clickAddBook"
         android:text="Выбрать файл"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
+        app:backgroundTint="@color/background_dark"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="157dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="92dp"
+        android:background="@color/background_dark"
+        android:onClick="sentToDB"
+        android:text="Отправить"
         android:textColor="@android:color/white"
         android:textColorHint="@color/white"
         app:backgroundTint="@color/background_dark"

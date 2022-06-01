@@ -57,6 +57,7 @@ public class EntryActivity extends Activity {
         buttonRegister = findViewById(R.id.buttonRegister);
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
+
         users = db.getReference("/");
         root = findViewById(R.id.rootElement);
         setContentView(R.layout.entry_page);
@@ -183,6 +184,8 @@ public class EntryActivity extends Activity {
                 });
             }
         });
+        new Single().getInstance().auth = auth;
+        new Single().getInstance().db = db;
         dialog.show();
 
     }
@@ -219,8 +222,6 @@ public class EntryActivity extends Activity {
                 }
                 editor.putString("nickname", editEmail.getText().toString()).commit();
                 editor.putString("password", password.getText().toString()).commit();
-                //settings.setPreferences("nickname", editEmail.getText().toString());
-                //settings.setPreferences("password", password.getText().toString());
                 auth.signInWithEmailAndPassword(editEmail.getText().toString(), password.getText().toString())
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
@@ -293,7 +294,8 @@ public class EntryActivity extends Activity {
                 });
             }
         });
-
+        new Single().getInstance().auth = auth;
+        new Single().getInstance().db = db;
         dialog.show();
 
     }
@@ -360,6 +362,8 @@ public class EntryActivity extends Activity {
                         }
                     }
                 });
+                new Single().getInstance().auth = auth;
+                new Single().getInstance().db = db;
                 startActivity(new Intent(EntryActivity.this, MainActivity.class));
                 finish();
             }
