@@ -93,7 +93,43 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/chooserButton1"
+        android:id="@+id/chooserPhotoButton"
+        android:layout_width="157dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="364dp"
+        android:background="@color/background_dark"
+        android:onClick="clickAddPhoto"
+        android:text="Выбрать мем"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
+        app:backgroundTint="@color/background_dark"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.748" />
+
+    <Button
+        android:id="@+id/chooseMetaInf"
+        android:layout_width="157dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="364dp"
+        android:background="@color/background_dark"
+        android:onClick="clickAddMetaInf"
+        android:text="Выбрать инфо"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
+        app:backgroundTint="@color/background_dark"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
+
+    <Button
+        android:id="@+id/chooserButton"
         android:layout_width="157dp"
         android:layout_height="43dp"
         android:layout_marginTop="211dp"
@@ -108,7 +144,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.972"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/sendButton"
@@ -124,6 +161,30 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/choosePhoto"
+        android:layout_width="229dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="Мемное лого"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.274"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <TextView
+        android:id="@+id/metaInf"
+        android:layout_width="229dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="Метаинформация"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.184"
+        tools:layout_editor_absoluteX="8dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
