@@ -79,6 +79,16 @@
             android:label="ViewUsers">
         </activity>
 
+        <activity
+            android:name=".RecyclerDataBaseActivity"
+            android:label="ViewUsers">
+        </activity>
+
+        <activity
+            android:name=".ViewUsersBookActivity"
+            android:label="ViewUsers">
+        </activity>
+
 
     </application>
     <uses-feature android:name="android.hardware.camera"

@@ -18,7 +18,6 @@ public class ProfileSupervisorActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Date date = new Date();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page_supervisor);
         TextView text = (TextView) findViewById(R.id.textView);
@@ -58,7 +57,7 @@ public class ProfileSupervisorActivity extends Activity {
     }
 
     public void ClickViewUsers(View view){
-        Intent intent=new Intent(ProfileSupervisorActivity.this,ViewUsersActivity.class);
+        Intent intent=new Intent(ProfileSupervisorActivity.this, RecyclerDataBaseActivity.class);
         startActivity(intent);
         finish();
     }

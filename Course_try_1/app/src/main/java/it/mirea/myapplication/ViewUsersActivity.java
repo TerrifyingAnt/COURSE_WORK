@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-
-import java.util.Date;
 
 public class ViewUsersActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_users_page);
+        setContentView(R.layout.view_users_book_page);
     }
 
 

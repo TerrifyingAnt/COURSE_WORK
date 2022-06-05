@@ -1,9 +1,13 @@
 package it.mirea.myapplication.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
     private String name, email, pass, phone;
     private TYPE type;
+    private Map<String, Integer> reading;
 
     public enum TYPE {
         READER,
@@ -20,6 +24,7 @@ public class User {
         this.pass = pass;
         this.phone = phone;
         this.type = type;
+        this.reading = new HashMap<>();
     }
 
     public String getName() {
@@ -60,5 +65,13 @@ public class User {
 
     public void setType(TYPE type) {
         this.type = type;
+    }
+
+    public Map<String, Integer> getReading() {
+        return reading;
+    }
+
+    public void setReading(Map<String, Integer> reading) {
+        this.reading = reading;
     }
 }

@@ -36,6 +36,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.json.JSONObject;
+
 import it.mirea.myapplication.user.User;
 
 
@@ -157,6 +160,22 @@ public class EntryActivity extends Activity {
 
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(EntryActivity.this, "Вы зарегистрировались!", Toast.LENGTH_SHORT).show();
+                                                //new Single().getInstance().logic = true;
+                                                //editor.putBoolean("log", true).commit();
+                                                //settings.setPreferencesBoolean("log", true);
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(EntryActivity.this, "Хуй!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("reading")
+                                        .setValue("{\"Map\":  {}}")
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
@@ -283,6 +302,18 @@ public class EntryActivity extends Activity {
                                 }
                             }
                         });
+
+                        users.child(firebaseUser.getUid()).child("reading").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.e("firebase", "Error getting data", task.getException());
+                                } else {
+                                    new Single().getInstance().reading = (String) task.getResult().getValue();
+                                }
+                            }
+                        });
+
                         startActivity(new Intent(EntryActivity.this, MainActivity.class));
                         finish();
                     }
@@ -300,8 +331,9 @@ public class EntryActivity extends Activity {
 
     }
 
-    @Override
+   @Override
     public void onResume() {
+       Intent intentToProfile;
         super.onResume();
         mSettings = getSharedPreferences("Login session", Context.MODE_PRIVATE);
         if (mSettings != null) {
@@ -362,8 +394,31 @@ public class EntryActivity extends Activity {
                         }
                     }
                 });
+
+                users.child(firebaseUser.getUid()).child("reading").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("firebase", "Error getting data", task.getException());
+                        } else {
+                            new Single().getInstance().reading = (String) task.getResult().getValue();
+                        }
+                    }
+                });
                 new Single().getInstance().auth = auth;
                 new Single().getInstance().db = db;
+/*                intentToProfile = new Intent(EntryActivity.this, ProfileActivity.class);
+                switch(new Single().getInstance().type){
+                    case 0:
+                        intentToProfile = new Intent(EntryActivity.this, ProfileActivity.class);
+                        break;
+                    case 1:
+                        intentToProfile = new Intent(EntryActivity.this, ProfileAuthorActivity.class);
+                        break;
+                    case 2:
+                        intentToProfile = new Intent(EntryActivity.this, ProfileSupervisorActivity.class);
+                        break;
+                }*/
                 startActivity(new Intent(EntryActivity.this, MainActivity.class));
                 finish();
             }

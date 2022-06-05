@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -36,11 +35,12 @@ public class AddBookActivity extends Activity {
     private static final int SELECT_DOC = 1;
     private static final int SELECT_IMAGE = 2;
     private static final int SELECT_METAINF = 3;
+    private static final int SELECT_DESCRIPTION = 4;
     private String selectedDocPath;
-    private TextView bookName, choosePhoto, chooseMetaInf;
+    private TextView bookName, choosePhoto, chooseMetaInf, chooseDescription;
     private Button chooserButton;
-    private Uri selectedDocUri, selectedImgUri, selectedTxtUri;
-    private File file;
+    private Uri selectedDocUri, selectedImgUri, selectedTxtUri, selectedDescUri;
+    private File file, mainFile;
     Spinner spinner;
     FirebaseDatabase db;
     DatabaseReference books, users;
@@ -55,14 +55,10 @@ public class AddBookActivity extends Activity {
         chooserButton = ((Button) findViewById(R.id.chooserButton));
         bookName = findViewById(R.id.bookName);
         choosePhoto = findViewById(R.id.choosePhoto);
-        chooseMetaInf = findViewById(R.id.chooseMetaInf);
-        spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.category_list, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        chooseMetaInf = findViewById(R.id.metaInf);
+        chooseDescription = findViewById(R.id.chooseDescription);
         storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReferenceFromUrl("gs://library-805f6.appspot.com/");
+        storageRef = storage.getReferenceFromUrl("gs://library-805f6.appspot.com");
     }
 
 
@@ -76,7 +72,7 @@ public class AddBookActivity extends Activity {
         // in onCreate or any event where your want the user to
         // select a file
         Intent intent = new Intent();
-        intent.setType("application/pdf");
+        intent.setType("text/plain");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,
                 "Выберите файл"), SELECT_DOC);
@@ -102,6 +98,16 @@ public class AddBookActivity extends Activity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,
                 "Выберите файл"), SELECT_METAINF);
+
+    }
+
+
+    public void clickAddDescription(View view) {
+        Intent intent = new Intent();
+        intent.setType("text/plain");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Выберите файл"), SELECT_DESCRIPTION);
 
     }
 
@@ -138,6 +144,7 @@ public class AddBookActivity extends Activity {
                 // = getPath(selectedDocUri);
                 file = new File(selectedDocUri.getPath());//create path from uri
                 String path = file.getPath();
+                mainFile = new File(selectedDocUri.getPath());
                 //String filepath = split[0];//assign it to a string(your choice).
                 bookName.setText(path);
             }
@@ -155,6 +162,12 @@ public class AddBookActivity extends Activity {
                 file = new File(selectedTxtUri.getPath());
                 String path = file.getPath();
                 chooseMetaInf.setText(path);
+            }
+            if (requestCode == SELECT_DESCRIPTION) {
+                selectedDescUri = data.getData();
+                file = new File(selectedDescUri.getPath());
+                String path = file.getPath();
+                chooseDescription.setText(path);
             }
         }
     }
@@ -179,51 +192,20 @@ public class AddBookActivity extends Activity {
 
     public void sentToDB(View view) {
 
-/*        db = new Single().getInstance().db;
-        books = db.getReference("/books");
-        users = db.getReference("/");
-        books.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .setValue("Скоро здесь появится объект под именем книга)")
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(AddBookActivity.this, "Книга проходит проверку!", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(AddBookActivity.this, ProfileAuthorActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(AddBookActivity.this, "Хуй!", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-        StorageReference pdfRef = storageRef.child("For Checking/" + Uri.fromFile(file).getLastPathSegment());
+        StorageReference pdfRef = storageRef.child("For Checking/" + Uri.fromFile(mainFile).getLastPathSegment());
         pdfRef.child("logo").putFile(selectedImgUri);
         pdfRef.child("metainf").putFile(selectedTxtUri);
-        UploadTask uploadTask = pdfRef.child(file.getName()).putFile(selectedDocUri);
+        pdfRef.child("description").putFile(selectedDescUri);
+        UploadTask uploadTask = pdfRef.child(mainFile.getName()).putFile(selectedDocUri);
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                 if (!task.isSuccessful()) {
                     throw task.getException();
                 }
-
                 // Continue with the task to get the download URL
-                return pdfRef.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
-                        Log.e("Doc URL", downloadUri.toString());
-                        docUrl = downloadUri.toString();
-                        Toast.makeText(AddBookActivity.this, "Книга проходит модерацию!", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                Toast.makeText(AddBookActivity.this, "Книга проходит модерацию!", Toast.LENGTH_SHORT).show();
+                return null;
             }
         });
         Intent intent = new Intent(AddBookActivity.this, ProfileAuthorActivity.class);

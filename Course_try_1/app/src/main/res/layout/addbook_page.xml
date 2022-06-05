@@ -60,97 +60,10 @@
             tools:srcCompat="@drawable/ic_newroundnotext" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/bookName"
-        android:layout_width="229dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Название книги"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="230dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Жанр"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/chooserPhotoButton"
-        android:layout_width="157dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="364dp"
-        android:background="@color/background_dark"
-        android:onClick="clickAddPhoto"
-        android:text="Выбрать мем"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/white"
-        app:backgroundTint="@color/background_dark"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.972"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.748" />
-
-    <Button
-        android:id="@+id/chooseMetaInf"
-        android:layout_width="157dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="364dp"
-        android:background="@color/background_dark"
-        android:onClick="clickAddMetaInf"
-        android:text="Выбрать инфо"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/white"
-        app:backgroundTint="@color/background_dark"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.972"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.502" />
-
-    <Button
-        android:id="@+id/chooserButton"
-        android:layout_width="157dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="211dp"
-        android:layout_marginBottom="364dp"
-        android:background="@color/background_dark"
-        android:onClick="clickAddBook"
-        android:text="Выбрать файл"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/white"
-        app:backgroundTint="@color/background_dark"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.972"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <Button
         android:id="@+id/sendButton"
         android:layout_width="157dp"
-        android:layout_height="43dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="92dp"
         android:background="@color/background_dark"
         android:onClick="sentToDB"
@@ -160,31 +73,126 @@
         app:backgroundTint="@color/background_dark"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
-    <TextView
-        android:id="@+id/choosePhoto"
-        android:layout_width="229dp"
-        android:layout_height="43dp"
-        android:gravity="center"
-        android:text="Мемное лого"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274"
-        tools:layout_editor_absoluteX="8dp" />
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="411dp"
+        android:layout_height="254dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/metaInf"
-        android:layout_width="229dp"
-        android:layout_height="43dp"
-        android:gravity="center"
-        android:text="Метаинформация"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184"
-        tools:layout_editor_absoluteX="8dp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10sp">
+
+            <TextView
+                android:id="@+id/metaInf"
+                android:layout_width="229dp"
+                android:layout_height="43dp"
+                android:gravity="center"
+                android:text="Метаинформация"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/chooseMetaInf"
+                android:layout_width="157dp"
+                android:layout_height="43dp"
+                android:background="@color/background_dark"
+                android:onClick="clickAddMetaInf"
+                android:text="Выбрать инфо"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/white"
+                app:backgroundTint="@color/background_dark"
+                tools:ignore="TouchTargetSizeCheck" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10sp">
+
+            <TextView
+                android:id="@+id/choosePhoto"
+                android:layout_width="232dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10sp"
+                android:gravity="center"
+                android:text="Мемное лого"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/chooserPhotoButton"
+                android:layout_width="157dp"
+                android:layout_height="48dp"
+                android:background="@color/background_dark"
+                android:onClick="clickAddPhoto"
+                android:text="Выбрать мем"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/white"
+                app:backgroundTint="@color/background_dark" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10sp">
+
+            <TextView
+                android:id="@+id/bookName"
+                android:layout_width="229dp"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:text="Название книги"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/chooserButton"
+                android:layout_width="157dp"
+                android:layout_height="48dp"
+                android:background="@color/background_dark"
+                android:onClick="clickAddBook"
+                android:text="Выбрать файл"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/white"
+                app:backgroundTint="@color/background_dark" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10sp">
+
+            <TextView
+                android:id="@+id/chooseDescription"
+                android:layout_width="229dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="Описание книги"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/chooserDescriptionButton"
+                android:layout_width="157dp"
+                android:layout_height="48dp"
+                android:background="@color/background_dark"
+                android:onClick="clickAddDescription"
+                android:text="Выбрать файл"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/white"
+                app:backgroundTint="@color/background_dark" />
+        </TableRow>
+
+    </TableLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
