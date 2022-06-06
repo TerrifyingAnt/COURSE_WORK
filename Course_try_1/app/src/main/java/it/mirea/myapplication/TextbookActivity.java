@@ -1,19 +1,15 @@
 package it.mirea.myapplication;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -32,20 +28,21 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +56,9 @@ public class TextbookActivity extends Activity {
     DatabaseReference users;
     Map<String, Integer> map;
     ScrollView scroll;
+    int last_page;
+    File rootPath;
+    File book;
 
 
     @Override
@@ -83,19 +83,7 @@ public class TextbookActivity extends Activity {
         }
         db = FirebaseDatabase.getInstance();
         users = db.getReference("/");
-        if (getIntent().getStringExtra("from").equals("checking")) {
-            users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("reading").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e("firebase", "Error getting data", task.getException());
-                    } else {
-                        new Single().getInstance().reading = (String) task.getResult().getValue();
-                    }
-                }
-            });
-        }
-        else {
+        //if (getIntent().getStringExtra("from").equals("")) {
             users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("reading_library").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -106,7 +94,19 @@ public class TextbookActivity extends Activity {
                     }
                 }
             });
-        }
+        //}
+        /*else {
+            users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("reading_library").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        Log.e("firebase", "Error getting data", task.getException());
+                    } else {
+                        new Single().getInstance().reading = (String) task.getResult().getValue();
+                    }
+                }
+            });
+        }*/
         reading = new Single().getInstance().reading;
         if (reading.replace(" ", "") != "{\"Map\":{}}") {
             try (StringReader reader = new StringReader(reading)) {
@@ -177,7 +177,7 @@ public class TextbookActivity extends Activity {
     }
 
 
-    public File downloadBook(){
+    public File downloadBook() throws IOException {
         System.out.println(getIntent().getStringExtra("bookTitle"));
         storage = FirebaseStorage.getInstance();
         if (getIntent().getStringExtra("from").equals("checking")) {
@@ -186,12 +186,13 @@ public class TextbookActivity extends Activity {
         else {
             storageReference = storage.getReferenceFromUrl("gs://library-805f6.appspot.com/Library").child(title + ".txt").child(title + ".txt");
         }
-        File rootPath = new File(Environment.getExternalStorageDirectory(), "Downloads");
+        rootPath = new File(Environment.getExternalStorageDirectory(), "Downloads");
         if (!rootPath.exists()) {
             rootPath.mkdirs();
         }
-        File localFile = new File(rootPath, title + ".txt");
-        storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+        book = new File(rootPath, title + ".txt");
+        book.createNewFile();
+        storageReference.getFile(book).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                 Log.e("firebase ", "найс");
@@ -202,8 +203,8 @@ public class TextbookActivity extends Activity {
                 Log.e("firebase ", "не найс с файлом, как всегда блять");
             }
         });
-        System.out.println(localFile);
-        return localFile;
+        System.out.println(book);
+        return book;
     }
 
     public void readBook() throws IOException {

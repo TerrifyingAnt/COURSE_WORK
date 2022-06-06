@@ -34,7 +34,6 @@ public class RegisterActivity extends Activity{
         int selectedId = radioGroup.getCheckedRadioButtonId();
         radioReader = (RadioButton) findViewById(R.id.radioButton);
         radioAuthor = (RadioButton) findViewById(R.id.radioButton2);
-        radioSupervisor = (RadioButton) findViewById(R.id.radioButton3);
         new Single().getInstance().type = 0;
         switch(selectedId) {
             case R.id.radioButton:
@@ -42,9 +41,6 @@ public class RegisterActivity extends Activity{
                 break;
             case R.id.radioButton2:
                 new Single().getInstance().type = 1;
-                break;
-            case R.id.radioButton3:
-                new Single().getInstance().type = 2;
                 break;
         }
         startActivity(intent);

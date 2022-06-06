@@ -62,14 +62,15 @@
 
     <Button
         android:id="@+id/sendButton"
-        android:layout_width="157dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="92dp"
         android:background="@color/background_dark"
         android:onClick="sentToDB"
         android:text="Отправить"
         android:textColor="@android:color/white"
         android:textColorHint="@color/white"
+        android:textSize="12sp"
         app:backgroundTint="@color/background_dark"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +79,8 @@
 
     <TableLayout
         android:id="@+id/tableLayout"
-        android:layout_width="411dp"
-        android:layout_height="254dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -93,16 +94,16 @@
 
             <TextView
                 android:id="@+id/metaInf"
-                android:layout_width="229dp"
-                android:layout_height="43dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Метаинформация"
                 android:textSize="20sp" />
 
             <Button
                 android:id="@+id/chooseMetaInf"
-                android:layout_width="157dp"
-                android:layout_height="43dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/background_dark"
                 android:onClick="clickAddMetaInf"
                 android:text="Выбрать инфо"
@@ -119,7 +120,7 @@
 
             <TextView
                 android:id="@+id/choosePhoto"
-                android:layout_width="232dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10sp"
                 android:gravity="center"
@@ -128,8 +129,8 @@
 
             <Button
                 android:id="@+id/chooserPhotoButton"
-                android:layout_width="157dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/background_dark"
                 android:onClick="clickAddPhoto"
                 android:text="Выбрать мем"
@@ -145,8 +146,8 @@
 
             <TextView
                 android:id="@+id/bookName"
-                android:layout_width="229dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:ems="10"
                 android:gravity="center|center_horizontal|center_vertical"
                 android:inputType="textPersonName"
@@ -156,8 +157,8 @@
 
             <Button
                 android:id="@+id/chooserButton"
-                android:layout_width="157dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/background_dark"
                 android:onClick="clickAddBook"
                 android:text="Выбрать файл"
@@ -174,16 +175,16 @@
 
             <TextView
                 android:id="@+id/chooseDescription"
-                android:layout_width="229dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Описание книги"
                 android:textSize="20sp" />
 
             <Button
                 android:id="@+id/chooserDescriptionButton"
-                android:layout_width="157dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/background_dark"
                 android:onClick="clickAddDescription"
                 android:text="Выбрать файл"

@@ -4,12 +4,14 @@ import static it.mirea.myapplication.user.User.TYPE.AUTHOR;
 import static it.mirea.myapplication.user.User.TYPE.READER;
 import static it.mirea.myapplication.user.User.TYPE.SUPERVISOR;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,6 +26,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,10 +43,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import it.mirea.myapplication.user.User;
 
 
 public class EntryActivity extends Activity {
+    private static final int REQUEST_WRITE_STORAGE_REQUEST_CODE = 1;
     Button buttonEntry, buttonRegister;
     ConstraintLayout root;
     FirebaseAuth auth;
@@ -64,6 +71,7 @@ public class EntryActivity extends Activity {
         users = db.getReference("/");
         root = findViewById(R.id.rootElement);
         setContentView(R.layout.entry_page);
+        requestAppPermissions();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -148,11 +156,6 @@ public class EntryActivity extends Activity {
                                         // do operations specific to this selection
                                         user.setType(AUTHOR);
                                         new Single().getInstance().type = 1;
-                                        break;
-                                    case R.id.radioButton3:
-                                        // do operations specific to this selection
-                                        user.setType(SUPERVISOR);
-                                        new Single().getInstance().type = 2;
                                         break;
                                 }
                                 user.setPass(password.getText().toString());
@@ -423,5 +426,29 @@ public class EntryActivity extends Activity {
                 finish();
             }
         }
+    }
+
+    private void requestAppPermissions() {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+
+        if (hasReadPermissions() && hasWritePermissions()) {
+            return;
+        }
+
+        ActivityCompat.requestPermissions(this,
+                new String[] {
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                }, REQUEST_WRITE_STORAGE_REQUEST_CODE); // your request code
+    }
+
+    private boolean hasReadPermissions() {
+        return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private boolean hasWritePermissions() {
+        return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
     }
 }

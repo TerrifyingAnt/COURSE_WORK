@@ -142,25 +142,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void showBooksByCategory(String category){
-        bookList.clear();
-        bookList.addAll(fullBooksList);
-        List<Book> filterBooks = new ArrayList<>();
-        if (category == "Все"){
-           filterBooks.addAll(bookList);
-        }
-        else {
-            for (Book i : bookList) {
-                System.out.println(i.getType() + " " + category);
-                if (i.getType().equals(category)) {
-                    filterBooks.add(i);
-                    System.out.println("8=============D " + i.getTitle());
+        if (fullBooksList.size() != 0 && f) {
+            bookList.clear();
+            bookList.addAll(fullBooksList);
+            List<Book> filterBooks = new ArrayList<>();
+            if (category == "Все") {
+                filterBooks.addAll(bookList);
+            } else {
+                for (Book i : bookList) {
+                    System.out.println(i.getType() + " " + category);
+                    if (i.getType().equals(category)) {
+                        filterBooks.add(i);
+                        System.out.println("8=============D " + i.getTitle());
+                    }
                 }
             }
+            bookList.clear();
+            bookList.addAll(filterBooks);
+            bookAdapter.notifyDataSetChanged();
         }
-        bookList.clear();
-        bookList.addAll(filterBooks);
-
-        bookAdapter.notifyDataSetChanged();
 
     }
 
@@ -275,22 +275,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onUpdate(View view) {
-        bookAdapter.notifyDataSetChanged();
+        //bookAdapter.notifyDataSetChanged();
         System.out.println("8===========D " + bookList.size());
-        fullBooksList.addAll(bookList);
+        if(fullBooksList.size() == 0) {
+            fullBooksList.addAll(bookList);
+        }
+        bookAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        bookList.clear();
-        bookList.addAll(fullBooksList);
-        List<Book> filterBooks = new ArrayList<>();
-        filterBooks.addAll(bookList);
-        bookList.clear();
-        bookList.addAll(filterBooks);
-        bookAdapter.notifyDataSetChanged();
+        if (fullBooksList.size() != 0 && f) {
+            bookList.clear();
+            bookList.addAll(fullBooksList);
+            //List<Book> filterBooks = new ArrayList<>();
+            //filterBooks.addAll(bookList);
+            //bookList.clear();
+            //bookList.addAll(filterBooks);
+            //bookAdapter.notifyDataSetChanged();
 
+        }
     }
 
 }
+

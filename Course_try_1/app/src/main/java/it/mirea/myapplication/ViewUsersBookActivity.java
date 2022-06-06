@@ -395,7 +395,7 @@ public class ViewUsersBookActivity extends Activity {
     }
 
 
-    public void clickUpload(View view) {
+    public void clickUpload(View view) throws IOException {
         String title;
         String author, pageNumber, bookType;
         NewBook newBook;
@@ -480,6 +480,7 @@ public class ViewUsersBookActivity extends Activity {
             rootPath.mkdirs();
         }
         File localFile = new File(rootPath, newBook.getTitle() + ".txt");
+        localFile.createNewFile();
         path = rootPath;
         storageReference.getFile(new File(rootPath, newBook.getTitle() + ".txt")).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
@@ -494,7 +495,7 @@ public class ViewUsersBookActivity extends Activity {
             }
         });
         selectedDocUri = Uri.fromFile(localFile);
-        uploadBook.child(title + ".txt").putFile(Uri.fromFile(/*new File(rootPath, title + ".txt"))*/localFile));
+        uploadBook.child(title + ".txt").putFile(Uri.fromFile(/*new File(/*rootPath, title + ".txt"*/localFile));
         uploadBook.child("metainf.json").putFile(Uri.fromFile(new File(rootPath, "bookJson.json")));
         UploadTask uploadTask = uploadBook.child("description.txt").putFile(Uri.fromFile(new File(rootPath, "description.txt")));
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -547,22 +548,21 @@ public class ViewUsersBookActivity extends Activity {
             }
         }
 
-        if(getIntent().getStringExtra("from") == "checking") {
-            users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("reading")
-                    .setValue(js)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            System.out.println("8===============D " + js);
+        users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("reading")
+                .setValue(js)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        System.out.println("8===============D " + js);
 
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    System.out.println("8===============D");
-                }
-            });
-        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("8===============D");
+            }
+        });
+
 
 
         deleteFolder();
@@ -581,7 +581,7 @@ public class ViewUsersBookActivity extends Activity {
     public void clickRead(View view) {
         Intent newIntent = new Intent(ViewUsersBookActivity.this, TextbookActivity.class);
         newIntent.putExtra("bookTitle", intent.getStringExtra("bookTitle"));
-        newIntent.putExtra("from", "checking");
+        newIntent.putExtra("from", "reading");
         startActivity(newIntent);
     }
 

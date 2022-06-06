@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -38,14 +39,9 @@ public class ProfileAuthorActivity extends Activity {
         email.setText(new Single().getInstance().email);
     }
 
-    public void ClickCamera(View view){
-        Intent intent=new Intent(ProfileAuthorActivity.this,CameraActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     public void ClickMain(View view){
-        Intent intent=new Intent(ProfileAuthorActivity.this,MainActivity.class);
+        Intent intent=new Intent(ProfileAuthorActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -58,6 +54,8 @@ public class ProfileAuthorActivity extends Activity {
 
     public void ClickEntry(View view){
         new Single().getInstance().logic = false;
+        new Single().getInstance().myBookList = new ArrayList<>();
+        new Single().getInstance().bookList = new ArrayList<>();
         SharedPreferences preferences = getSharedPreferences("Login session", Context.MODE_PRIVATE);
         preferences.edit().remove("log").commit();
         FirebaseAuth.getInstance().signOut();
@@ -68,6 +66,7 @@ public class ProfileAuthorActivity extends Activity {
 
     public void ClickAddBook(View view){
         Intent intent=new Intent(ProfileAuthorActivity.this,AddBookActivity.class);
+        intent.putExtra("from", "reading");
         startActivity(intent);
         finish();
     }

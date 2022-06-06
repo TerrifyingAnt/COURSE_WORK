@@ -54,22 +54,23 @@
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/ic_gear"
+            android:background="@drawable/ic_update"
             android:contentDescription="@string/settings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_gear"
+            app:srcCompat="@drawable/ic_update"
             tools:ignore="ImageContrastCheck,OnClick"
-            tools:srcCompat="@drawable/ic_gear" />
+            tools:srcCompat="@drawable/ic_update"
+            android:onClick="onUpdate"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="185dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Мои книги"
         android:textSize="24sp"
@@ -80,13 +81,12 @@
         app:layout_constraintVertical_bias="0.028" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myBooksRecycle"
-        android:layout_width="409dp"
-        android:layout_height="538dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        android:id="@+id/myBooksRecycle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

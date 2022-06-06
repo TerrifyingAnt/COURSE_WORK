@@ -88,7 +88,7 @@ public class BookActivity extends Activity {
     public void ClickRead(View view){
         Intent intent = new Intent(BookActivity.this, TextbookActivity.class);
         new Single().getInstance().text = "Здесь будет книга";
-        intent.putExtra("from", "library");
+        intent.putExtra("from", "reading_library");
         //intent.putExtra("bookText", new Single().getInstance().text);
         intent.putExtra("bookTitle", getIntent().getStringExtra("bookTitle"));
         startActivity(intent);

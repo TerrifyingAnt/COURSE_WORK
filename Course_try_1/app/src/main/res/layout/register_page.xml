@@ -65,8 +65,8 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="139dp"
-        android:layout_height="151dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,13 +87,6 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="Автор" />
 
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal|center_vertical"
-            android:minHeight="48dp"
-            android:text="Наблюдающий" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
