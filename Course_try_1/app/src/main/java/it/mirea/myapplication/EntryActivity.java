@@ -201,7 +201,7 @@ public class EntryActivity extends Activity {
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EntryActivity.this, "8====D", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EntryActivity.this, "Что-то не так", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

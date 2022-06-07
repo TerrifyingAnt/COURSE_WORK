@@ -66,7 +66,6 @@ public class SettingsActivity extends Activity {
             //bookListReading.addAll(fullBookList);
             //setBookRecycler(bookListReading);
             flag = true;
-            System.out.println("8================================D " + bookListReading.size());
         }
         setBookRecycler(bookListReading);
 
@@ -171,60 +170,12 @@ public class SettingsActivity extends Activity {
                         File localFile = new File(rootPath, "metainf.json");
                         for (int i = 0; i < new Single().getInstance().bookNames.size(); i++) {
                             for(int j = 0; j < myReadBooks.size(); j++) {
-                                System.out.println("8================D " + myReadBooks.get(j) + " " + new Single().getInstance().bookNames.get(i));
                                 if (myReadBooks.get(j).equals(new Single().getInstance().bookNames.get(i))){
                                     for(int k = 0; k < new Single().getInstance().bookList.size(); k++)
                                         if (new Single().getInstance().bookList.get(k).getTitle().equals(new Single().getInstance().bookNames.get(i))) {
                                             bookListReading.add(new Single().getInstance().bookList.get(k));
                                             System.out.println("ОНИ РАВНЫ");
                                         }
-
-
-/*                                    if (i > 0)
-                                        localFile.delete();
-                                    StorageReference storageRef = storage.getReference("/").child("Library").child(bookNames.get(i) + ".txt").child("metainf.json");
-                                    localFile = new File(rootPath, "metainf.json");
-                                    if (!rootPath.exists()) {
-                                        rootPath.mkdirs();
-                                    }
-                                    int finalI = i;
-                                    storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                            Log.e("firebase ", "найс");
-                                            try (FileReader fileReader = new FileReader(new File(rootPath, "metainf.json"))) {
-                                                JsonArray objects = Jsoner.deserializeMany(fileReader);
-                                                JsonArray o = (JsonArray) objects;
-                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                                    String title = (String) (((Map) ((Map) (o.get(0))).get("Book"))).get("title");
-                                                    String author = (String) (((Map) ((Map) (o.get(0))).get("Book"))).get("author");
-                                                    String number_of_pages = (String) (((Map) ((Map) (o.get(0))).get("Book"))).get("number_of_pages");
-                                                    String type = (String) (((Map) ((Map) (o.get(0))).get("Book"))).get("type");
-                                                    StorageReference imgRef = storage.getReference("/").child("Library").child(title + ".txt").child("logo");
-                                                    StorageReference descRef = storage.getReference("/").child("Library").child(title + ".txt").child("description.txt");
-                                                    StorageReference textRef = storage.getReference("/").child("Library").child(title + ".txt").child(title + ".txt");
-                                                    System.out.println("8=============D " + title);
-                                                    book = new Book(finalI + 1, number_of_pages, type, title, author, imgRef, descRef, textRef);
-                                                    System.out.println("8=============D" + book.toString());
-                                                    //bookList.add(book);
-                                                    bookListReading.add(book);
-                                                    new Single().getInstance().myBookList.add(book);
-                                                    //setBookRecycler(fullBooksList);
-                                                    System.out.println("bookList" + bookListReading + " fullBooksList" + fullBookList);
-                                                }
-                                                //bookListReading = new Single().getInstance().myBookList;
-                                                //new Single().getInstance().myBookList = new ArrayList<>();
-                                                System.out.println("8=====================D " + bookListReading.size());
-                                            } catch (FileNotFoundException e) {
-                                                e.printStackTrace();
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            } catch (JsonException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-                                    break;*/
                                 }
                             }
                         }

@@ -110,7 +110,6 @@ public class TextbookActivity extends Activity {
         reading = new Single().getInstance().reading;
         if (reading.replace(" ", "") != "{\"Map\":{}}") {
             try (StringReader reader = new StringReader(reading)) {
-                System.out.println("8========D " + reading);
                 JsonArray objects = Jsoner.deserializeMany(reader);
                 Mapper mapper = new DozerBeanMapper();
                 JsonArray o = (JsonArray) objects;
@@ -121,7 +120,6 @@ public class TextbookActivity extends Activity {
                         System.out.println(keys.get(i).replace(" ", "") + " " + title.replace(" ", ""));
                         map.put(keys.get(i), Integer.parseInt(String.valueOf(values.get(i))));
                         if(keys.get(i).equals(title)) {
-                            System.out.println("8===============================================D они равны");
                             scroll.setScrollY(Integer.parseInt(String.valueOf(values.get(i))));
                             int offsetY = Integer.parseInt(String.valueOf(values.get(i)));
                             scroll.post(new Runnable() {
@@ -130,7 +128,6 @@ public class TextbookActivity extends Activity {
                                 }
                             });
                         }
-                        System.out.println("8==================D " + keys.get(i) + " " + values.get(i));
                     }
                 }
             } catch (JsonException e) {
@@ -241,13 +238,11 @@ public class TextbookActivity extends Activity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            System.out.println("8===============D " + js);
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    System.out.println("8===============D");
                 }
             });
         }
@@ -257,13 +252,11 @@ public class TextbookActivity extends Activity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            System.out.println("8===============D " + js);
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    System.out.println("8===============D");
                 }
             });
         }

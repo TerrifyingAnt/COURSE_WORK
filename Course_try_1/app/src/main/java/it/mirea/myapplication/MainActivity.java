@@ -153,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(i.getType() + " " + category);
                     if (i.getType().equals(category)) {
                         filterBooks.add(i);
-                        System.out.println("8=============D " + i.getTitle());
                     }
                 }
             }
@@ -249,9 +248,8 @@ public class MainActivity extends AppCompatActivity {
                                             StorageReference imgRef = storage.getReference("/").child("Library").child(title + ".txt").child("logo");
                                             StorageReference descRef = storage.getReference("/").child("Library").child(title + ".txt").child("description.txt");
                                             StorageReference textRef = storage.getReference("/").child("Library").child(title + ".txt").child(title + ".txt");
-                                            System.out.println("8=============D " + title);
+
                                             book = new Book(finalI + 1, number_of_pages, type, title, author, imgRef, descRef, textRef);
-                                            System.out.println("8=============D" + book.toString());
                                             //bookList.add(book);
                                             new Single().getInstance().bookList.add(book);
                                             //setBookRecycler(fullBooksList);
@@ -270,13 +268,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         bookList = new Single().getInstance().bookList;
-        System.out.println("8=====================D " + bookList.size());
         //setBookRecycler(bookList);
     }
 
     public void onUpdate(View view) {
         //bookAdapter.notifyDataSetChanged();
-        System.out.println("8===========D " + bookList.size());
         if(fullBooksList.size() == 0) {
             fullBooksList.addAll(bookList);
         }

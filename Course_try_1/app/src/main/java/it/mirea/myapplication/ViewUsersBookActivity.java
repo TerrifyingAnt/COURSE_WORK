@@ -528,7 +528,6 @@ public class ViewUsersBookActivity extends Activity {
         jsonString = new Single().getInstance().reading;
         if (jsonString.replace(" ", "") != "{\"Map\":{}}") {
             try (StringReader reader = new StringReader(jsonString)) {
-                System.out.println("8========D " + jsonString);
                 JsonArray objects = Jsoner.deserializeMany(reader);
                 Mapper mapper = new DozerBeanMapper();
                 JsonArray o = (JsonArray) objects;
@@ -540,7 +539,6 @@ public class ViewUsersBookActivity extends Activity {
                         if(!keys.get(i).equals(title)) {
                             map.put(keys.get(i), Integer.parseInt(String.valueOf(values.get(i))));
                         }
-                        System.out.println("8==================D " + keys.get(i) + " " + values.get(i));
                     }
                 }
             } catch (JsonException e) {
@@ -553,13 +551,12 @@ public class ViewUsersBookActivity extends Activity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        System.out.println("8===============D " + js);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                System.out.println("8===============D");
+
             }
         });
 
